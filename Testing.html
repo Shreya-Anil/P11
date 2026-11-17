@@ -1,0 +1,198 @@
+<!-- Author: Shreya Anil -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillBridge - Learner Registration</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #dbeafe, #ede9fe);
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 550px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        h1 {
+            text-align: center;
+            color: #4338ca;
+        }
+
+        .tagline {
+            text-align: center;
+            color: #666;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 11px;
+            margin-top: 7px;
+            border: 1px solid #aaa;
+            border-radius: 7px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #312e81;
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+            line-height: 1.7;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>SkillBridge</h1>
+    <p class="tagline">Connecting Learners with Industry Mentors</p>
+
+    <h2>Learner Registration</h2>
+    <p>Register yourself to find the right industry mentor!</p>
+
+    <form>
+
+        <label>Full Name</label>
+        <input type="text" id="name"
+               placeholder="Enter your full name">
+
+        <label>Email Address</label>
+        <input type="email" id="email"
+               placeholder="Enter your email">
+
+        <label>Area of Interest</label>
+        <select id="interest">
+            <option value="">Select your interest</option>
+            <option value="Web Development">Web Development</option>
+            <option value="Artificial Intelligence">Artificial Intelligence</option>
+            <option value="Data Science">Data Science</option>
+            <option value="Cyber Security">Cyber Security</option>
+            <option value="Cloud Computing">Cloud Computing</option>
+        </select>
+
+        <label>Current Skill Level</label>
+        <select id="level">
+            <option value="">Select your level</option>
+            <option value="Beginner">Beginner</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Advanced">Advanced</option>
+        </select>
+
+        <label>Years of Experience</label>
+        <input type="text" id="experience"
+               placeholder="Enter years of experience">
+
+        <label>Why do you need a mentor?</label>
+        <textarea id="message" rows="3"
+                  placeholder="Tell us about your learning goals"></textarea>
+
+        <button type="button" onclick="processForm()">
+            Submit Registration
+        </button>
+
+    </form>
+
+    <div id="result"></div>
+
+</div>
+
+<script>
+
+    function processForm() {
+
+        // Getting form values
+        let name = document.getElementById("name").value.trim();
+        let email = document.getElementById("email").value.trim();
+        let interest = document.getElementById("interest").value;
+        let level = document.getElementById("level").value;
+        let experience = document.getElementById("experience").value.trim();
+        let message = document.getElementById("message").value.trim();
+
+        let result = document.getElementById("result");
+
+        result.style.display = "block";
+
+        // Checking empty fields
+        if (name === "" || email === "" ||
+            interest === "" || level === "" ||
+            experience === "" || message === "") {
+
+            result.innerHTML = "Please fill all the fields!";
+            result.style.color = "red";
+            result.style.background = "#fee2e2";
+        }
+
+        // Checking numbers only
+        else if (!/^[0-9]+$/.test(experience)) {
+
+            result.innerHTML =
+                "Years of experience must contain numbers only!";
+
+            result.style.color = "red";
+            result.style.background = "#fee2e2";
+        }
+
+        // Checking email format
+        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+
+            result.innerHTML = "Please enter a valid email address!";
+
+            result.style.color = "red";
+            result.style.background = "#fee2e2";
+        }
+
+        // Displaying successful registration
+        else {
+
+            result.style.color = "#15803d";
+            result.style.background = "#dcfce7";
+
+            result.innerHTML =
+                "<h3>Registration Successful!</h3>" +
+                "Welcome to SkillBridge, " + name + "!<br>" +
+                "Email: " + email + "<br>" +
+                "Interest: " + interest + "<br>" +
+                "Skill Level: " + level + "<br>" +
+                "Experience: " + experience + " years<br>" +
+                "Learning Goal: " + message;
+        }
+    }
+
+</script>
+
+</body>
+</html>
